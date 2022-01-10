@@ -30,7 +30,7 @@ const UserEditScreen = ({ match, history }) => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: USER_UPDATE_RESET });
-      history.push('/admin/userList');
+      history.push('/admin/userlist');
     } else {
       if (!user.name || user._id !== userId) {
         dispatch(getUserDetails(userId));
@@ -49,7 +49,7 @@ const UserEditScreen = ({ match, history }) => {
 
   return (
     <>
-      <Link to='/admin/userList' className='btn btn-light my-3'>
+      <Link to='/admin/userlist' className='btn btn-light my-3'>
         GO BACK
       </Link>
 
