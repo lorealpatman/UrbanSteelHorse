@@ -41,7 +41,7 @@ const ProductListScreen = ({ history, match }) => {
   useEffect(() => {
     dispatch({ type: PRODUCT_CREATE_RESET });
 
-    if (!userInfo.isAdmin) {
+    if (!userInfo || !userInfo.isAdmin) {
       history.push('/login');
     }
 
@@ -52,8 +52,8 @@ const ProductListScreen = ({ history, match }) => {
     }
   }, [
     dispatch,
-    userInfo,
     history,
+    userInfo,
     successDelete,
     successCreate,
     createdProduct,
@@ -61,7 +61,7 @@ const ProductListScreen = ({ history, match }) => {
   ]);
 
   const deleteHandler = (id) => {
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm('Are you sure')) {
       dispatch(deleteProduct(id));
     }
   };
@@ -100,6 +100,7 @@ const ProductListScreen = ({ history, match }) => {
                 <th>PRICE</th>
                 <th>CATEGORY</th>
                 <th>BRAND</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -110,7 +111,6 @@ const ProductListScreen = ({ history, match }) => {
                   <td>${product.price}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
-
                   <td>
                     <LinkContainer to={`/admin/product/${product._id}/edit`}>
                       <Button variant='light' className='btn-sm'>
@@ -129,7 +129,7 @@ const ProductListScreen = ({ history, match }) => {
               ))}
             </tbody>
           </Table>
-          <Paginate pages={pages} page={page} isAdmin={true}></Paginate>
+          <Paginate pages={pages} page={page} isAdmin={true} />
         </>
       )}
     </>

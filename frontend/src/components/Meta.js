@@ -12,7 +12,7 @@ const Meta = ({ title, description, keywords }) => {
 };
 
 Meta.defaultProps = {
-  title: 'Welcome to ProShop',
+  title: 'Welcome to Urban Steel Horse',
   desciption: 'We sell the best urban motorcycle gear',
   keywords: 'motorcycle gear, buy motorcyle gear, urban motorcycle gear',
 };
