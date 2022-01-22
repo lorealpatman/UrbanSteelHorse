@@ -89,7 +89,7 @@ const RegisterScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
         <ReCAPTCHA
-          sitekey='6LczrC0eAAAAAP1Kf1JhZTsem3JYC6ZTwgNNbk0t'
+          sitekey='6LcRhy4eAAAAALuknn1HJ03owOYxxW52rUj1SBDk'
           onChange={verifyCallback}
           style={{ margin: '10px' }}
         />
