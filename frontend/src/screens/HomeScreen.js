@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product';
+import Hero from '../components/Hero';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
@@ -25,6 +26,10 @@ const HomeScreen = ({ match }) => {
 
   return (
     <>
+      <div className='hmhero'>
+        <Hero />
+      </div>
+
       <Meta />
       {!keyword ? (
         <ProductCarousel />

@@ -6,6 +6,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { register } from '../actions/userActions';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const RegisterScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -13,6 +14,7 @@ const RegisterScreen = ({ location, history }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
+  const [isHuman, setIsHuman] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -36,6 +38,11 @@ const RegisterScreen = ({ location, history }) => {
     }
   };
 
+  const verifyCallback = (e) => {
+    console.log(e);
+    setIsHuman({ isHuman: true });
+  };
+
   return (
     <FormContainer>
       <h1>Sign Up</h1>
@@ -44,7 +51,7 @@ const RegisterScreen = ({ location, history }) => {
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='name'>
-          <Form.Label>Name:</Form.Label>
+          <Form.Label>Name</Form.Label>
           <Form.Control
             type='name'
             placeholder='Enter name'
@@ -53,7 +60,7 @@ const RegisterScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId='email'>
-          <Form.Label>Email Address:</Form.Label>
+          <Form.Label>Email Address</Form.Label>
           <Form.Control
             type='email'
             placeholder='Enter email'
@@ -63,7 +70,7 @@ const RegisterScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId='password'>
-          <Form.Label>Password:</Form.Label>
+          <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
             placeholder='Enter password'
@@ -73,7 +80,7 @@ const RegisterScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId='confirmPassword'>
-          <Form.Label>Password:</Form.Label>
+          <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type='password'
             placeholder='Confirm password'
@@ -81,7 +88,17 @@ const RegisterScreen = ({ location, history }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Button type='submit' variant='primary'>
+        <ReCAPTCHA
+          sitekey='6LczrC0eAAAAAP1Kf1JhZTsem3JYC6ZTwgNNbk0t'
+          onChange={verifyCallback}
+          style={{ margin: '10px' }}
+        />
+        {!isHuman && (
+          <Form.Group style={{ color: 'red' }}>
+            Must Verify with reCaptcha to Register
+          </Form.Group>
+        )}
+        <Button type='submit' variant='primary' disabled={!isHuman}>
           Register
         </Button>
       </Form>
